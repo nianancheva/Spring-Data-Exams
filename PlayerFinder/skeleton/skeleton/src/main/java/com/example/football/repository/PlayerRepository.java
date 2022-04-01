@@ -15,11 +15,26 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     Optional<Player> findByEmail(String email);
 
-    List<Player> findByBirthDateAfterOrderByStatShootingDescStatPassingDescStatEnduranceDescLastNameAsc(LocalDate after);
+    //---------------------------
+    //List<Player> findByBirthDateAfterOrderByStatShootingDescStatPassingDescStatEnduranceDescLastNameAsc(LocalDate after);
+    
 
     @Query("select p from Player p where p.birthDate > '1995-01-01' and p.birthDate < '2003-01-01' " +
             "order by p.stat.shooting desc, p.stat.passing desc, p.stat.endurance desc, p.lastName asc")
     List<Player> findAllByBirthDateBetween();
+    
+
+    @Query("""
+            select p from Player p
+            where p.birthDate between ?1 and ?2
+            order by p.stat.shooting DESC, p.stat.passing DESC, p.stat.endurance DESC, p.lastName""")
+    List<Player> findAllByBirthDateBetweenOrderByStatShootingDescStatPassingDescStatEnduranceDescLastNameAsc(LocalDate first, LocalDate second);
+           
+    
+//    @Query("select p from Player p where p.birthDate between ?1 and ?2")
+//    List<Player> findAllByBirthDateBetween(LocalDate first, LocalDate second);
+
+    //---------------------------
 
     /**
      * •	Order Them by Shooting in Desc Order, Then by Passing in Desc Order, Then by Endurance Desc Order and Finally Then by Player Last Name.
