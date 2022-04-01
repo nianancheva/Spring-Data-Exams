@@ -32,9 +32,9 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
     private final PictureRepository pictureRepository;
 
-    JAXBContext context;
-    Unmarshaller unmarshaller;
-    ModelMapper modelMapper;
+    private final JAXBContext context;
+    private final Unmarshaller unmarshaller;
+    private final ModelMapper modelMapper;
 
     private final Path path = Path.of("src","main", "resources", "files", "posts.xml");
 
